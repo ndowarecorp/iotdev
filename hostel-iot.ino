@@ -20,8 +20,8 @@
 char const * deviceID = "ESP-fbr-120419-1";
 
 // wifi
-char const * ssid = "WIFI-GUEST";
-char const * pass = "12345678";
+char const * ssid = "SSIDNAME";
+char const * pass = "SSIDPASS";
 // topic
 String tClient   = "pemda";
 String tRegion   = "yogyakarta";
@@ -29,9 +29,9 @@ String tLocation = "ishiro";
 String tRoom     = "kamar13";
 
 /* host */
-char const * hostAddr = "13.250.113.167";
-char const * userHost = "ndoware";
-char const * passHost = "ndoware";
+char const * hostAddr = "xx.xx.xx.xx";
+char const * userHost = "user";
+char const * passHost = "password";
 
 /* sersors */
 boolean motionEnable = true;
