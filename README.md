@@ -2,21 +2,21 @@
 Development IoT
 
 
-# lib dependency
+## lib dependency
 
-* <WiFiManager.h>          //https://github.com/tzapu/WiFiManager
+* <WiFiManager.h>(https://github.com/tzapu/WiFiManager)
 * <ArduinoJson.h>          //https://github.com/bblanchon/ArduinoJson
 * <MQTT.h>
 * <OneWire.h>
 * <DallasTemperature.h>
 
 
-# how to git
+### how to git
 
 any changes?
 
-> *git add .
-> *git commit -m "whats new?"
-> *git push
+> * git add .
+> * git commit -m "whats new?"
+> * git push
 
 -done-
