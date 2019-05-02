@@ -15,8 +15,8 @@ Development IoT
 
 any changes?
 
-> git add .
-> git commit -m "whats new?"
-> git push
+> *git add .
+> *git commit -m "whats new?"
+> *git push
 
 -done-
