@@ -1,11 +1,20 @@
 # iotdev
 Development IoT
 
+#INDEX
 
-## Device Source Code
->hostel-iot.no
+## FRONT END
+> source code: 
 
-###lib dependency
+
+## BACK END
+> source code: 
+
+
+## DEVICE
+> source code: *hostel-iot.ino*
+
+### library dependency
 
 * <WiFiManager.h>(https://github.com/tzapu/WiFiManager)
 * <ArduinoJson.h>(https://github.com/bblanchon/ArduinoJson)
@@ -23,6 +32,8 @@ any changes?
 1. git add .
 2. git commit -m "whats new?"
 3. git push
+
+
 
 
 *_ndoware.corp@2019_* 
