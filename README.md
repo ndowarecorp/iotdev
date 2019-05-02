@@ -9,3 +9,14 @@ Development IoT
 <MQTT.h>
 <OneWire.h>
 <DallasTemperature.h>
+
+
+# how to git
+
+any changes?
+
+git add .
+git commit -m "whats new?"
+git push
+
+-done-
