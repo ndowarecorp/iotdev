@@ -12,12 +12,12 @@ Development IoT
 
 
 ## DEVICE
-> source code: *hostel-iot.ino(hostel-iot.ino)*
+> source code: *[hostel-iot.ino](hostel-iot.ino)*
 
 ### library dependency
 
-* <WiFiManager.h>(https://github.com/tzapu/WiFiManager)
-* <ArduinoJson.h>(https://github.com/bblanchon/ArduinoJson)
+* [<WiFiManager.h>](https://github.com/tzapu/WiFiManager)
+* [<ArduinoJson.h>](https://github.com/bblanchon/ArduinoJson)
 * <MQTT.h>
 * <OneWire.h>
 * <DallasTemperature.h>
