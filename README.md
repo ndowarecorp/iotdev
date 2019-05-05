@@ -12,7 +12,7 @@ Development IoT
 
 
 ## DEVICE
-> source code: *hostel-iot.ino*
+> source code: *hostel-iot.ino(hostel-iot.ino)*
 
 ### library dependency
 
