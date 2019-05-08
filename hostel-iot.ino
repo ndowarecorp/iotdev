@@ -9,9 +9,12 @@
   v2.1 Sunday, 5 May 2019
        - more parameter
        - led notif
+  v2.2 Wednesday, 8 May 2019
+       - Device ID based on Chip ID
+       - more CSS
 
   idea?
-  -    
+  -
 */
 
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
@@ -64,6 +67,7 @@ char pub_sec[3] = "0";   // setiap n detik
 bool shouldSaveConfig = true;
 
 /* ------------------------------------------------------ */
+String prefixDeviceID = "Ndoware-";
 
 // init variables
 unsigned long lastSensMillis = 0;
@@ -107,12 +111,16 @@ void configModeCallback (WiFiManager *myWiFiManager) {
   ticker.attach(0.2, tick);
 }
 
+
 void mqttConnect() {
   Serial.print("Connecting ");
-  String stDeviceID;
-  stDeviceID = "ndosense-" + String(ESP.getChipId());
+
+  String chipID = String(ESP.getChipId(), HEX);
+  chipID.toUpperCase();
+  String stDeviceID = prefixDeviceID  + chipID;
   char deviceID[stDeviceID.length()];
-  stDeviceID.toCharArray(deviceID, sizeof(deviceID));
+  stDeviceID.toCharArray(deviceID, sizeof(deviceID) + 1);
+
   Serial.print(deviceID);
   while (!client.connect(deviceID, mqtt_user, mqtt_pass)) {
     Serial.print(".");
@@ -223,7 +231,7 @@ void setup() {
   char typeTagBuffer[30];
   typeTag.toCharArray(typeTagBuffer, 30);
   WiFiManagerParameter custom_led_mon("led", "led enable", "on", 3, typeTagBuffer);
-  
+
   WiFiManagerParameter custom_text_dev("<hr/><small>(dev only)</small><br/>");
   WiFiManagerParameter custom_text_sense("<small>Interval SENSE room (minutes, seconds)</small>");
   WiFiManagerParameter custom_sense_min("sminutes", "sense minutes", sense_min, 3);
@@ -262,16 +270,25 @@ void setup() {
   wifiManager.addParameter(&custom_pub_min);
   wifiManager.addParameter(&custom_pub_sec);
 
-  wifiManager.setCustomHeadElement("<style>body{  background-image: linear-gradient(to left, #ffffff 0%, #eeeeee 75%);}h1{font-family: serif;text-shadow: 2px 2px rgba(0,0,0,0.19)}h3{color: #dddddd;}button{background-color:#ec741f;  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);}</style>");
+  wifiManager.setCustomHeadElement("<style>body{  background-image: linear-gradient(to left, #ffffff 0%, #eeeeee 75%);}h1{font-family: serif;text-shadow: 2px 2px rgba(0,0,0,0.19)}h3{color: #dddddd;}button{background-color:#ec741f;  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);}input#led {  position: relative;  -webkit-appearance: none;  outline: none;  width: 50px;  height: 30px;  background-color: #fff;  border: 1px solid #D9DADC;  border-radius: 50px;  box-shadow: inset -20px 0 0 0 #D9DADC;}input#led:after {  content: "";  position: absolute;  top: 1px;  left: 1px;  background: transparent;  width: 26px;  height: 26px;  border-radius: 50%;  box-shadow: 2px 4px 6px rgba(0,0,0,0.2);}input#led:checked {  box-shadow: inset 20px 0 0 0 #2196F3;border-color: #2196F3;}input#led:checked:after {left: 20px;box-shadow: -2px 4px 3px rgba(0,0,0,0.05);}</style>");
 
   //wifiManager.setMinimumSignalQuality();
   //wifiManager.setTimeout(120);
+
+  String chipID = String(ESP.getChipId(), HEX);
+  chipID.toUpperCase();
+  String stDeviceID = prefixDeviceID  + chipID;
+  char deviceID[stDeviceID.length()];
+  stDeviceID.toCharArray(deviceID, sizeof(deviceID) + 1);
+
+  WiFi.hostname(deviceID);
+
 
   //fetches ssid and pass and tries to connect
   //if it does not connect it starts an access point with the specified name
   //here  "AutoConnectAP"
   //and goes into a blocking loop awaiting configuration
-  if (!wifiManager.autoConnect("Ndoware-device", "password")) {
+  if (!wifiManager.autoConnect(deviceID, "password")) {
     ticker.attach(0.6, tick);
     Serial.println("failed to connect and hit timeout");
     delay(3000);
